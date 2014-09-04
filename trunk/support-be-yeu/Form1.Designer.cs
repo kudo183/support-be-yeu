@@ -31,13 +31,14 @@
             this.txtInput = new System.Windows.Forms.TextBox();
             this.txtOutput = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
-            this.btnCopyToClipboard = new System.Windows.Forms.Button();
+            this.btnCopyAll = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lblMsg = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.btnCopyMST = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtInput
@@ -67,15 +68,15 @@
             this.btnOk.UseVisualStyleBackColor = true;
             this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
             // 
-            // btnCopyToClipboard
+            // btnCopyAll
             // 
-            this.btnCopyToClipboard.Location = new System.Drawing.Point(455, 483);
-            this.btnCopyToClipboard.Name = "btnCopyToClipboard";
-            this.btnCopyToClipboard.Size = new System.Drawing.Size(75, 23);
-            this.btnCopyToClipboard.TabIndex = 2;
-            this.btnCopyToClipboard.Text = "Copy";
-            this.btnCopyToClipboard.UseVisualStyleBackColor = true;
-            this.btnCopyToClipboard.Click += new System.EventHandler(this.btnCopyToClipboard_Click);
+            this.btnCopyAll.Location = new System.Drawing.Point(455, 483);
+            this.btnCopyAll.Name = "btnCopyAll";
+            this.btnCopyAll.Size = new System.Drawing.Size(75, 23);
+            this.btnCopyAll.TabIndex = 2;
+            this.btnCopyAll.Text = "Copy All";
+            this.btnCopyAll.UseVisualStyleBackColor = true;
+            this.btnCopyAll.Click += new System.EventHandler(this.btnCopyAll_Click);
             // 
             // label1
             // 
@@ -122,17 +123,28 @@
             this.label4.TabIndex = 4;
             this.label4.Text = "Họ tên";
             // 
+            // btnCopyMST
+            // 
+            this.btnCopyMST.Location = new System.Drawing.Point(294, 483);
+            this.btnCopyMST.Name = "btnCopyMST";
+            this.btnCopyMST.Size = new System.Drawing.Size(111, 23);
+            this.btnCopyMST.TabIndex = 5;
+            this.btnCopyMST.Text = "Copy Mã Số Thuế";
+            this.btnCopyMST.UseVisualStyleBackColor = true;
+            this.btnCopyMST.Click += new System.EventHandler(this.btnCopyMST_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(740, 529);
+            this.Controls.Add(this.btnCopyMST);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblMsg);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnCopyToClipboard);
+            this.Controls.Add(this.btnCopyAll);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.txtInput);
@@ -148,13 +160,14 @@
         private System.Windows.Forms.TextBox txtInput;
         private System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.Button btnOk;
-        private System.Windows.Forms.Button btnCopyToClipboard;
+        private System.Windows.Forms.Button btnCopyAll;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMsg;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button btnCopyMST;
     }
 }
 
