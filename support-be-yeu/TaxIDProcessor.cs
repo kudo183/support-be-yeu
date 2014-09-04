@@ -5,14 +5,26 @@ using WebserverInteractionClassLibrary;
 
 namespace TaxIDProcessor
 {
+    public class TaxIDInfo
+    {
+        public string CMND { get; set; }
+        public string MaSoThue { get; set; }
+        public string HoTen { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0}\t{1}\t{2}", CMND, MaSoThue, HoTen);
+        }
+    }
+
     public class TaxIDProcessor
     {
-        public List<string> GetTaxIDs(IEnumerable<string> personalIDs)
+        public List<TaxIDInfo> GetTaxIDs(IEnumerable<string> personalIDs)
         {
             return personalIDs.Select(personalID => GetTaxID(personalID)).ToList();
         }
 
-        public string GetTaxID(string personalID)
+        public TaxIDInfo GetTaxID(string personalID)
         {
             var ma = new RequestManager();
             var url = "http://www.gdt.gov.vn/wps/portal/!ut/p/b1/04_Sj9CPykssy0xPLMnMz0vMAfGjzOINTCw9fSzCgv2dzLxdDTxDHV2NLAM8jC3CzIAKIoEKnN0dPUzMfQwMLEzcDQw8TZz8_TycAw0NPI0J6Q_XjwIrwWcCxAwcwNFA388jPzdVvyA3wiDLxFERAIgooeI!/dl4/d5/L2dJQSEvUUt3QS80SmtFL1o2XzA0OUlMOFZTT1JVMjYwSVVKU0pKQTcyS1Q1/?WCM_GLOBAL_CONTEXT=/wps/wcm/connect/sa_home";
@@ -35,7 +47,27 @@ namespace TaxIDProcessor
             return temp.Substring(0, j + end.Length);
         }
 
-        private string ParseTable(string table)
+        //private string ParseTable(string table)
+        //{
+        //    table = RemoveTagAttribute(table, "<table");
+        //    table = RemoveTagAttribute(table, "<th");
+        //    table = RemoveTagAttribute(table, "<tr");
+        //    table = RemoveTagAttribute(table, "<td");
+        //    table = RemoveTagAttribute(table, "<a");
+
+        //    table = table.Replace("&nbsp;", "");
+        //    var doc = XElement.Parse(table);
+        //    var nodes = doc.Descendants("a");
+        //    if (nodes.Count() < 5)
+        //    {
+        //        return string.Empty;
+        //    }
+
+        //    return string.Format("{0}\t{1}\t{2}", nodes.ElementAt(4).Value, nodes.ElementAt(1).Value,
+        //                         nodes.ElementAt(2).Value);
+        //}
+
+        private TaxIDInfo ParseTable(string table)
         {
             table = RemoveTagAttribute(table, "<table");
             table = RemoveTagAttribute(table, "<th");
@@ -46,8 +78,17 @@ namespace TaxIDProcessor
             table = table.Replace("&nbsp;", "");
             var doc = XElement.Parse(table);
             var nodes = doc.Descendants("a");
+            if (nodes.Count() < 5)
+            {
+                return null;
+            }
 
-            return string.Format("{0}\t{1}\t{2}", nodes.ElementAt(4).Value, nodes.ElementAt(1).Value, nodes.ElementAt(2).Value);
+            return new TaxIDInfo()
+            {
+                CMND = nodes.ElementAt(4).Value,
+                MaSoThue = nodes.ElementAt(1).Value,
+                HoTen = nodes.ElementAt(2).Value
+            };
         }
 
         private static string RemoveTagAttribute(string table, string tag)
